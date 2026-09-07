@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaleido Care — Centro integrato per il neurosviluppo e la famiglia</title>
+<meta name="description" content="Kaleido Care è un ecosistema integrato dedicato alla cura, al supporto e allo sviluppo continuo dei bambini e delle loro famiglie, da 0 a 18 anni. Frattamaggiore (NA).">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230F4A5C'/%3E%3Ccircle cx='32' cy='20' r='14' fill='%23E7BA6E' fill-opacity='.85'/%3E%3Ccircle cx='20' cy='40' r='14' fill='%23E38A72' fill-opacity='.85'/%3E%3Ccircle cx='44' cy='40' r='14' fill='%2393BEDB' fill-opacity='.85'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal-900:#0F4A5C;
+    --teal-700:#1D6478;
+    --teal-500:#3E8095;
+    --sage-600:#6E9280;
+    --sage-300:#B9CBBE;
+    --coral-500:#E38A72;
+    --coral-300:#F0C0B0;
+    --mustard-400:#E7BA6E;
+    --mustard-200:#F4DEB2;
+    --sky-400:#93BEDB;
+    --sky-200:#CFE2EE;
+    --moss-400:#A0BE9E;
+    --ink:#1C2B2E;
+    --ink-soft:#4A5B5C;
+    --paper:#F8F8F4;
+    --paper-alt:#EFF1E9;
+    --paper-deep:#E7EBE1;
+    --white:#FFFFFF;
+    --line:rgba(28,43,46,0.12);
+    --shadow-soft: 0 20px 60px -30px rgba(15,74,92,0.35);
+    --radius-lg: 32px;
+    --radius-md: 20px;
+    --radius-sm: 12px;
+    --maxw: 1200px;
+    --serif: "Fraunces", Georgia, serif;
+    --sans: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *,*::before,*::after{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+  body{
+    margin:0;
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit;}
+  h1,h2,h3,h4{font-family:var(--serif); font-weight:600; margin:0; letter-spacing:-0.01em;}
+  p{margin:0;}
+  ul{margin:0; padding:0; list-style:none;}
+  button{font-family:inherit;}
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  @media(min-width:900px){ .wrap{padding:0 48px;} }
+
+  section{position:relative;}
+
+  /* ---------- Typography scale ---------- */
+  .fs-display{ font-size:clamp(2.6rem, 6.4vw, 5.4rem); line-height:1.04; }
+  .fs-h2{ font-size:clamp(2rem, 4.2vw, 3.1rem); line-height:1.12; }
+  .fs-h3{ font-size:clamp(1.35rem, 2.2vw, 1.7rem); line-height:1.28; }
+  .fs-lead{ font-size:clamp(1.1rem, 1.6vw, 1.3rem); line-height:1.55; }
+  .fs-body{ font-size:1rem; }
+  .fs-num{ font-family:var(--serif); font-weight:400; }
+
+  .measure{ max-width:60ch; }
+  .measure-sm{ max-width:46ch; }
+
+  .kicker{
+    font-family:var(--sans);
+    font-weight:700;
+    font-size:0.8rem;
+    color:var(--teal-700);
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+  }
+  .kicker::before{
+    content:"";
+    width:22px; height:2px;
+    background:var(--coral-500);
+    display:inline-block;
+    border-radius:2px;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:16px 30px;
+    border-radius:100px;
+    font-weight:700;
+    font-size:0.98rem;
+    text-decoration:none;
+    border:1.5px solid transparent;
+    cursor:pointer;
+    transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s, background .35s, color .35s, border-color .35s;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:var(--teal-900);
+    color:var(--white);
+    box-shadow:0 14px 30px -14px rgba(15,74,92,0.55);
+  }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 18px 34px -14px rgba(15,74,92,0.6); }
+  .btn-ghost{
+    background:transparent;
+    color:var(--teal-900);
+    border-color:rgba(15,74,92,0.35);
+  }
+  .btn-ghost:hover{ border-color:var(--teal-900); background:rgba(15,74,92,0.06); transform:translateY(-2px); }
+  .btn-light{
+    background:var(--white);
+    color:var(--teal-900);
+  }
+  .btn-light:hover{ transform:translateY(-2px); box-shadow:0 14px 30px -14px rgba(0,0,0,0.25); }
+  .btn-row{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; }
+
+  /* ---------- Reveal-on-scroll (subtle, single treatment) ---------- */
+  .reveal{ opacity:0; transform:translateY(16px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in-view{ opacity:1; transform:translateY(0); }
+
+  /* ================= HEADER ================= */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(248,248,244,0.82);
+    backdrop-filter:blur(14px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s, background .3s;
+  }
+  header.scrolled{ border-bottom-color:var(--line); }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px;
+    max-width:var(--maxw); margin:0 auto;
+  }
+  @media(min-width:900px){ .nav{padding:18px 48px;} }
+  .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .brand img{ height:34px; width:auto; }
+  .nav-links{ display:none; align-items:center; gap:36px; }
+  .nav-links a{
+    text-decoration:none; color:var(--ink); font-weight:600; font-size:0.95rem;
+    position:relative; padding:4px 0;
+  }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:-2px; height:2px; width:0%;
+    background:var(--coral-500); transition:width .3s ease;
+  }
+  .nav-links a:hover::after{ width:100%; }
+  @media(min-width:900px){ .nav-links{ display:flex; } }
+  .nav-cta{ display:none; }
+  @media(min-width:900px){ .nav-cta{ display:inline-flex; padding:12px 24px; font-size:0.9rem;} }
+
+  .burger{
+    display:flex; flex-direction:column; justify-content:center; gap:5px;
+    width:42px; height:42px; border:none; background:none; cursor:pointer; padding:0;
+  }
+  @media(min-width:900px){ .burger{ display:none; } }
+  .burger span{ display:block; height:2px; width:24px; background:var(--ink); border-radius:2px; transition:transform .3s, opacity .3s; margin:0 auto;}
+  .burger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .burger.open span:nth-child(2){ opacity:0; }
+  .burger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu{
+    position:fixed; inset:0; top:0; z-index:99;
+    background:var(--paper);
+    display:flex; flex-direction:column;
+    padding:100px 32px 40px;
+    transform:translateX(100%);
+    transition:transform .45s cubic-bezier(.2,.8,.2,1);
+  }
+  .mobile-menu.open{ transform:translateX(0); }
+  .mobile-menu a{
+    font-family:var(--serif); font-size:1.9rem; text-decoration:none; color:var(--ink);
+    padding:14px 0; border-bottom:1px solid var(--line);
+  }
+  .mobile-menu .btn{ margin-top:28px; align-self:flex-start; }
+
+  /* ================= HERO ================= */
+  .hero{
+    padding:150px 0 90px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:56px;
+    align-items:center;
+    position:relative;
+    z-index:2;
+  }
+  @media(min-width:960px){
+    .hero-grid{ grid-template-columns:1.05fr 0.95fr; gap:24px; }
+  }
+  .hero-copy p.fs-lead{ margin-top:22px; color:var(--ink-soft); }
+  .hero-copy .btn-row{ margin-top:38px; }
+  .hero-copy .fs-display{ color:var(--teal-900); }
+  .hero-copy .fs-display em{ font-style:italic; color:var(--sage-600); }
+
+  .hero-visual{
+    position:relative;
+    aspect-ratio:1/1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .hero-visual svg{ width:100%; height:100%; overflow:visible; }
+
+  .hero-note{
+    display:flex; align-items:center; gap:14px;
+    margin-top:44px; padding-top:28px; border-top:1px solid var(--line);
+    color:var(--ink-soft); font-size:0.92rem;
+  }
+  .hero-note strong{ color:var(--teal-900); font-family:var(--serif); font-size:1.3rem; }
+
+  .bg-blob{
+    position:absolute; border-radius:50%; filter:blur(60px); opacity:0.5; z-index:1; pointer-events:none;
+  }
+
+  /* ================= SECTION SHELLS ================= */
+  .section{ padding:96px 0; }
+  .section-alt{ background:var(--paper-alt); }
+  .section-deep{ background:var(--teal-900); color:var(--white); }
+  .section-deep .kicker{ color:var(--mustard-400); }
+  .section-deep .kicker::before{ background:var(--mustard-400); }
+  .section-head{ max-width:640px; margin-bottom:56px; }
+  .section-head .fs-h2{ margin-top:14px; color:var(--teal-900); }
+  .section-deep .section-head .fs-h2{ color:var(--white); }
+  .section-head .fs-lead{ margin-top:18px; color:var(--ink-soft); }
+  .section-deep .section-head .fs-lead{ color:rgba(255,255,255,0.78); }
+
+  /* ================= INTRO ================= */
+  .intro-layout{ display:grid; grid-template-columns:1fr; gap:40px; }
+  @media(min-width:900px){ .intro-layout{ grid-template-columns:0.85fr 1.15fr; gap:64px; align-items:start; } }
+  .intro-figure{
+    border-radius:var(--radius-lg);
+    background:linear-gradient(155deg, var(--sky-200), var(--paper-alt) 60%);
+    aspect-ratio:4/5;
+    position:relative;
+    overflow:hidden;
+  }
+  .stat-row{ display:grid; grid-template-columns:repeat(2,1fr); gap:28px; margin-top:40px; }
+  .stat-row .stat-num{ font-size:2.4rem; color:var(--teal-900); }
+  .stat-row .stat-label{ color:var(--ink-soft); font-size:0.92rem; margin-top:6px; }
+
+  /* ================= KALEIDO CONCEPT ================= */
+  .kaleido-section{ overflow:hidden; }
+  .kaleido-layout{ display:grid; grid-template-columns:1fr; gap:48px; align-items:center; }
+  @media(min-width:960px){ .kaleido-layout{ grid-template-columns:0.95fr 1.05fr; gap:24px; } }
+  .kaleido-stage{
+    position:relative; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center;
+    cursor:default;
+  }
+  .kaleido-stage svg{ width:100%; height:100%; }
+  .kaleido-hint{ text-align:center; margin-top:18px; font-size:0.85rem; color:var(--ink-soft); }
+  .kaleido-copy .fs-lead{ margin-top:20px; color:var(--ink-soft); }
+  .kaleido-copy .fs-lead + .fs-lead{ margin-top:16px; }
+
+  /* ================= COMPETENZE ================= */
+  .comp-grid{ display:grid; grid-template-columns:1fr; gap:20px; }
+  @media(min-width:680px){ .comp-grid{ grid-template-columns:1fr 1fr; } }
+  @media(min-width:1080px){ .comp-grid{ grid-template-columns:repeat(3,1fr); } }
+  .comp-card{
+    background:var(--white);
+    border-radius:var(--radius-md);
+    padding:32px 28px;
+    border:1px solid var(--line);
+    transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s, border-color .35s;
+    display:flex; flex-direction:column; gap:16px;
+  }
+  .comp-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-soft); border-color:transparent; }
+  .comp-mark{
+    width:52px; height:52px; border-radius:16px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .comp-mark svg{ width:26px; height:26px; }
+  .comp-card h3{ font-size:1.28rem; }
+  .comp-card p{ color:var(--ink-soft); font-size:0.97rem; }
+  .comp-meta{ margin-top:auto; padding-top:12px; border-top:1px solid var(--line); font-size:0.88rem; color:var(--ink-soft); }
+  .comp-meta a{ color:var(--teal-700); font-weight:700; text-decoration:none; }
+  .comp-meta a:hover{ text-decoration:underline; }
+  .comp-card.wide{ grid-column: span 1; }
+  @media(min-width:1080px){ .comp-card.wide{ grid-column: span 3; flex-direction:row; align-items:center; gap:28px; } }
+  .comp-card.wide .comp-body{ flex:1; }
+
+  /* ================= EQUIPE ================= */
+  .equipe-layout{ display:grid; grid-template-columns:1fr; gap:56px; align-items:center; }
+  @media(min-width:960px){ .equipe-layout{ grid-template-columns:1fr 1fr; gap:48px; } }
+  .converge-stage{ position:relative; aspect-ratio:1/1; }
+  .converge-stage svg{ width:100%; height:100%; }
+  .discipline-list{ display:flex; flex-direction:column; gap:0; }
+  .discipline-list li{
+    display:flex; align-items:center; gap:16px;
+    padding:18px 0; border-bottom:1px solid var(--line);
+  }
+  .discipline-list li:first-child{ padding-top:0; }
+  .dot{ width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+  .discipline-list span.name{ font-weight:700; color:var(--teal-900); }
+  .discipline-list p{ color:var(--ink-soft); font-size:0.92rem; margin-top:2px; }
+
+  /* ================= FAMIGLIA ================= */
+  .famiglia-layout{ display:grid; grid-template-columns:1fr; gap:44px; }
+  @media(min-width:960px){ .famiglia-layout{ grid-template-columns:1fr 1fr; gap:72px; align-items:center; } }
+  .quote-card{
+    background:var(--white); border-radius:var(--radius-lg); padding:44px 36px;
+    box-shadow:var(--shadow-soft);
+    position:relative;
+  }
+  .quote-card p.fs-h3{ color:var(--teal-900); font-style:italic; }
+  .famiglia-points{ display:flex; flex-direction:column; gap:26px; margin-top:8px; }
+  .famiglia-points .point{ display:flex; gap:18px; }
+  .famiglia-points .num{ font-family:var(--serif); font-size:1.4rem; color:var(--coral-500); flex-shrink:0; width:40px; }
+  .famiglia-points h4{ font-size:1.1rem; color:var(--teal-900); margin-bottom:6px; }
+  .famiglia-points p{ color:var(--ink-soft); font-size:0.96rem; }
+
+  /* ================= SPAZI ================= */
+  .spazi-layout{ display:grid; grid-template-columns:1fr; gap:40px; }
+  @media(min-width:960px){ .spazi-layout{ grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center; } }
+  .spazi-photo{
+    border-radius:var(--radius-lg);
+    overflow:hidden;
+    position:relative;
+    box-shadow:var(--shadow-soft);
+  }
+  .spazi-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .spazi-tags{ display:flex; flex-wrap:wrap; gap:10px; margin-top:28px; }
+  .tag{
+    padding:9px 16px; border-radius:100px; background:var(--white);
+    border:1px solid var(--line); font-size:0.85rem; font-weight:700; color:var(--teal-700);
+  }
+
+  /* ================= APPROCCIO INTEGRATO ================= */
+  .approccio-section{ overflow:hidden; }
+  .venn-layout{ display:grid; grid-template-columns:1fr; gap:48px; align-items:center; }
+  @media(min-width:960px){ .venn-layout{ grid-template-columns:0.9fr 1.1fr; gap:24px; } }
+  .venn-stage{ position:relative; aspect-ratio:1/1; }
+  .venn-stage svg{ width:100%; height:100%; }
+
+  /* ================= INTESTINO-CERVELLO ================= */
+  .gut-brain{
+    background:var(--white);
+    border-radius:var(--radius-lg);
+    padding:48px 32px;
+    border:1px solid var(--line);
+    display:grid; grid-template-columns:1fr; gap:32px;
+  }
+  @media(min-width:900px){ .gut-brain{ padding:56px; grid-template-columns:0.9fr 1.1fr; gap:48px; } }
+  .gut-brain-note{
+    background:var(--paper-alt); border-radius:var(--radius-md); padding:22px 24px;
+    font-size:0.92rem; color:var(--ink-soft); margin-top:24px;
+    border-left:3px solid var(--sage-600);
+  }
+
+  /* ================= PERCHÉ ================= */
+  .why-grid{ display:grid; grid-template-columns:1fr; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--radius-lg); overflow:hidden; }
+  @media(min-width:760px){ .why-grid{ grid-template-columns:1fr 1fr; } }
+  .why-card{ background:var(--white); padding:44px 36px; }
+  .why-card .fs-num{ font-size:2.6rem; color:var(--sage-300); display:block; margin-bottom:18px; }
+  .why-card h3{ margin-bottom:12px; color:var(--teal-900); }
+  .why-card p{ color:var(--ink-soft); }
+
+  /* ================= ETÀ ================= */
+  .eta-section{ text-align:center; padding:120px 0; }
+  .eta-number{
+    font-family:var(--serif); font-weight:500;
+    font-size:clamp(4.5rem, 18vw, 11rem);
+    color:var(--teal-900);
+    line-height:0.95;
+    display:flex; align-items:center; justify-content:center; gap:0.15em; flex-wrap:wrap;
+  }
+  .eta-number .sep{ color:var(--coral-500); font-size:0.55em; margin:0 0.08em; }
+  .eta-section p.fs-lead{ max-width:520px; margin:26px auto 0; color:var(--ink-soft); }
+
+  /* ================= CTA FINALE ================= */
+  .cta-final{ background:var(--teal-900); color:var(--white); text-align:center; padding:120px 0; position:relative; overflow:hidden; }
+  .cta-final h2{ color:var(--white); }
+  .cta-final p.fs-lead{ color:rgba(255,255,255,0.78); max-width:520px; margin:20px auto 0; }
+  .cta-final .btn-row{ justify-content:center; margin-top:40px; }
+  .cta-final .phone-link{ margin-top:22px; font-size:1.05rem; color:rgba(255,255,255,0.85); text-decoration:none; display:inline-block; }
+  .cta-final .phone-link:hover{ text-decoration:underline; }
+
+  /* ================= CONTATTI / FOOTER ================= */
+  footer{ background:var(--paper-deep); padding:72px 0 32px; }
+  .footer-grid{ display:grid; grid-template-columns:1fr; gap:48px; }
+  @media(min-width:900px){ .footer-grid{ grid-template-columns:1.2fr 1fr 1fr; gap:32px; } }
+  .footer-brand img{ height:38px; }
+  .footer-brand p{ margin-top:18px; color:var(--ink-soft); font-size:0.94rem; max-width:34ch; }
+  .footer-col h4{ font-size:0.85rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--teal-700); margin-bottom:18px; }
+  .footer-col p, .footer-col a{ display:block; color:var(--ink); text-decoration:none; font-size:0.98rem; margin-bottom:10px; }
+  .footer-col a:hover{ color:var(--teal-700); }
+  .footer-call{
+    display:inline-flex; align-items:center; gap:10px; margin-top:6px;
+    background:var(--teal-900); color:var(--white); padding:12px 22px; border-radius:100px; font-weight:700; text-decoration:none; font-size:0.92rem;
+  }
+  .footer-bottom{ margin-top:56px; padding-top:24px; border-top:1px solid var(--line); display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; color:var(--ink-soft); font-size:0.85rem; }
+
+  /* Skip link / focus visibility */
+  .skip-link{ position:absolute; left:-999px; top:0; background:var(--teal-900); color:#fff; padding:12px 18px; border-radius:0 0 10px 0; z-index:200;}
+  .skip-link:focus{ left:0; }
+  a:focus-visible, button:focus-visible{ outline:3px solid var(--coral-500); outline-offset:3px; }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Vai al contenuto</a>
+
+<header id="siteHeader">
+  <nav class="nav">
+    <a href="#top" class="brand" aria-label="Kaleido Care — home">
+      <img src="assets/logo.svg" alt="Kaleido Care — Centro integrato per il neurosviluppo e la famiglia">
+    </a>
+    <div class="nav-links">
+      <a href="#concetto">Il metodo</a>
+      <a href="#competenze">Competenze</a>
+      <a href="#equipe">Équipe</a>
+      <a href="#spazi">Spazi</a>
+      <a href="#contatti">Contatti</a>
+    </div>
+    <a href="#contatti" class="btn btn-primary nav-cta">Contattaci</a>
+    <button class="burger" id="burgerBtn" aria-label="Apri menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#concetto">Il metodo</a>
+  <a href="#competenze">Competenze</a>
+  <a href="#equipe">Équipe</a>
+  <a href="#famiglia">Famiglia</a>
+  <a href="#spazi">Spazi</a>
+  <a href="#contatti">Contatti</a>
+  <a href="#contatti" class="btn btn-primary">Contattaci</a>
+</div>
+
+<main id="main">
+
+  <!-- ================= HERO ================= -->
+  <div id="top"></div>
+  <section class="hero">
+    <div class="bg-blob" style="width:520px;height:520px; background:var(--mustard-200); top:-160px; right:-140px;"></div>
+    <div class="bg-blob" style="width:420px;height:420px; background:var(--sky-200); bottom:-140px; left:-120px;"></div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="kicker">Frattamaggiore (NA) · età evolutiva 0–18 anni</p>
+        <h1 class="fs-display" style="margin-top:20px;">Ogni bambino è un incontro di <em>colori</em> diversi.</h1>
+        <p class="fs-lead measure">Kaleido Care riunisce le competenze che accompagnano la crescita di bambini e famiglie in un unico percorso condiviso: uno sguardo integrato, mai frammentato.</p>
+        <div class="btn-row">
+          <a href="#concetto" class="btn btn-primary">Scopri Kaleido Care</a>
+          <a href="#contatti" class="btn btn-ghost">Contattaci</a>
+        </div>
+        <div class="hero-note">
+          <strong>Un unico centro</strong>
+          <span>per neuropsichiatria, psicologia, TNPEE, logopedia e integrazione biomedica.</span>
+        </div>
+      </div>
+      <div class="hero-visual" id="heroVisual" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- ================= INTRO ================= -->
+  <section class="section" id="intro">
+    <div class="wrap intro-layout">
+      <div class="intro-figure reveal" id="introFigure" aria-hidden="true"></div>
+      <div>
+        <p class="kicker">Chi siamo</p>
+        <h2 class="fs-h2 reveal" style="margin-top:16px; color:var(--teal-900);">Un ecosistema pensato intorno al bambino</h2>
+        <p class="fs-lead measure reveal" style="margin-top:22px; color:var(--ink-soft);">Kaleido Care è uno spazio in cui professioniste e professionisti di discipline diverse lavorano fianco a fianco, condividendo uno sguardo comune sul percorso di crescita di ogni bambino.</p>
+        <p class="fs-lead measure reveal" style="margin-top:16px; color:var(--ink-soft);">Non un insieme di servizi separati, ma un ecosistema unico di cura, ascolto e accompagnamento continuo — costruito attorno ai tempi e ai bisogni di ogni famiglia.</p>
+        <div class="stat-row">
+          <div>
+            <div class="stat-num fs-num">0–18</div>
+            <div class="stat-label">anni, l'intera età evolutiva</div>
+          </div>
+          <div>
+            <div class="stat-num fs-num">5</div>
+            <div class="stat-label">aree di competenza integrate</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= IL CONCETTO KALEIDO ================= -->
+  <section class="section section-alt kaleido-section" id="concetto">
+    <div class="wrap kaleido-layout">
+      <div class="kaleido-copy">
+        <p class="kicker">Il concetto</p>
+        <h2 class="fs-h2 reveal" style="margin-top:16px; color:var(--teal-900);">Perché "Kaleido"</h2>
+        <p class="fs-lead reveal">In un caleidoscopio pochi elementi si combinano e si ricompongono in infinite immagini armoniche. Nessuna configurazione è uguale all'altra, eppure ogni immagine ha il suo equilibrio.</p>
+        <p class="fs-lead reveal">È l'idea che guida il nostro modo di lavorare: ogni bambino porta con sé una combinazione unica di bisogni, tempi e potenzialità. Le competenze presenti nel centro si intrecciano per comporre, ogni volta, un percorso diverso e su misura.</p>
+      </div>
+      <div>
+        <div class="kaleido-stage" id="kaleidoStage" aria-hidden="true"></div>
+        <p class="kaleido-hint">Muovi il cursore per ricomporre il caleidoscopio</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= COMPETENZE ================= -->
+  <section class="section" id="competenze">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Le competenze</p>
+        <h2 class="fs-h2 reveal">Le professionalità del centro</h2>
+        <p class="fs-lead reveal">Aree diverse, un solo filo conduttore: accompagnare lo sviluppo del bambino con competenza e ascolto.</p>
+      </div>
+      <div class="comp-grid">
+
+        <article class="comp-card wide reveal">
+          <div class="comp-mark" style="background:var(--sky-200);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal-900)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2a4 4 0 0 0-4 4v.2A3.5 3.5 0 0 0 3 9.5V11a3.5 3.5 0 0 0 1.8 3.06A4 4 0 0 0 9 18v2"/><path d="M14.5 2a4 4 0 0 1 4 4v.2A3.5 3.5 0 0 1 21 9.5V11a3.5 3.5 0 0 1-1.8 3.06A4 4 0 0 1 15 18v2"/><path d="M9 20h6"/></svg>
+          </div>
+          <div class="comp-body">
+            <h3>Neuropsichiatria Infantile</h3>
+            <p>Valutazione e presa in carico neuropsichiatrica dei percorsi di sviluppo in età evolutiva, come punto di riferimento clinico all'interno dell'équipe.</p>
+          </div>
+          <div class="comp-meta">Dr. Vitale Giovanni — <a href="http://www.braingas.it" target="_blank" rel="noopener">www.braingas.it</a></div>
+        </article>
+
+        <article class="comp-card reveal">
+          <div class="comp-mark" style="background:var(--coral-300);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal-900)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-3-8-6.2-8-10.5A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8 3.5C20 14.8 16 18 12 21Z"/></svg>
+          </div>
+          <h3>Psicologia e Psicoterapia</h3>
+          <p>Ascolto e sostegno psicologico per il bambino e per il nucleo familiare, lungo tutte le fasi del percorso di crescita.</p>
+        </article>
+
+        <article class="comp-card reveal">
+          <div class="comp-mark" style="background:var(--mustard-200);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal-900)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.4"/><path d="M12 7.4V13m0 0-4 7m4-7 4 7m-8-3h8"/></svg>
+          </div>
+          <h3>TNPEE</h3>
+          <p>Terapia della Neuro e Psicomotricità dell'Età Evolutiva: il corpo, il movimento e il gioco come strada per lo sviluppo.</p>
+        </article>
+
+        <article class="comp-card reveal">
+          <div class="comp-mark" style="background:var(--sage-300);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal-900)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13a4 4 0 1 1 8 0v2a4 4 0 0 1-8 0Z"/><path d="M12 19v2M9 21h6"/></svg>
+          </div>
+          <h3>Logopedia</h3>
+          <p>Valutazione e trattamento delle difficoltà di linguaggio, comunicazione e alimentazione in età evolutiva.</p>
+        </article>
+
+        <article class="comp-card wide reveal">
+          <div class="comp-mark" style="background:var(--sky-200);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal-900)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3m0 12v3M4.2 7 7 8.5m10-1.5 2.8-1.5M4.2 17 7 15.5m10 1.5 2.8 1.5"/><circle cx="12" cy="12" r="4.5"/></svg>
+          </div>
+          <div class="comp-body">
+            <h3>Integrazione biomedica</h3>
+            <p>Quando clinicamente indicato, il percorso può essere integrato con una valutazione della dimensione nutrizionale, gastrointestinale, immunologica e metabolica.</p>
+          </div>
+          <div class="comp-meta">Dott. Andrea Del Buono — Fondazione DDClinic Research</div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EQUIPE ================= -->
+  <section class="section section-alt" id="equipe">
+    <div class="wrap equipe-layout">
+      <div>
+        <p class="kicker">Il lavoro di équipe</p>
+        <h2 class="fs-h2 reveal" style="margin-top:16px; color:var(--teal-900);">Tante competenze. Un unico percorso.</h2>
+        <p class="fs-lead reveal" style="margin-top:20px; color:var(--ink-soft);">All'interno di Kaleido Care le diverse professionalità non lavorano come servizi separati: condividono una visione coordinata del percorso del bambino, confrontandosi sugli obiettivi e sui passi da compiere insieme.</p>
+        <ul class="discipline-list" style="margin-top:32px;">
+          <li><span class="dot" style="background:var(--teal-700);"></span><div><span class="name">Neuropsichiatria Infantile</span></div></li>
+          <li><span class="dot" style="background:var(--coral-500);"></span><div><span class="name">Psicologia e Psicoterapia</span></div></li>
+          <li><span class="dot" style="background:var(--mustard-400);"></span><div><span class="name">TNPEE</span></div></li>
+          <li><span class="dot" style="background:var(--sage-600);"></span><div><span class="name">Logopedia</span></div></li>
+          <li><span class="dot" style="background:var(--sky-400);"></span><div><span class="name">Integrazione biomedica</span></div></li>
+        </ul>
+      </div>
+      <div class="converge-stage" id="convergeStage" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- ================= FAMIGLIA ================= -->
+  <section class="section" id="famiglia">
+    <div class="wrap famiglia-layout">
+      <div>
+        <p class="kicker">La famiglia</p>
+        <h2 class="fs-h2 reveal" style="margin-top:16px; color:var(--teal-900);">Accanto al bambino, accanto alla famiglia</h2>
+        <div class="famiglia-points">
+          <div class="point reveal">
+            <span class="num fs-num">01</span>
+            <div><h4>Ascolto reale</h4><p>Il punto di partenza è sempre l'ascolto di ciò che la famiglia porta, senza fretta e senza giudizio.</p></div>
+          </div>
+          <div class="point reveal">
+            <span class="num fs-num">02</span>
+            <div><h4>Collaborazione, non delega</h4><p>I genitori sono parte attiva del percorso, non semplici spettatori di ciò che accade in stanza.</p></div>
+          </div>
+          <div class="point reveal">
+            <span class="num fs-num">03</span>
+            <div><h4>Continuità con la quotidianità</h4><p>Il lavoro cerca collegamento con la vita di ogni giorno e, quando previsto, con il contesto scolastico.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="quote-card reveal">
+        <p class="fs-h3">"Kaleido Care non si occupa soltanto del bambino: accompagna l'intera famiglia lungo il percorso."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SPAZI ================= -->
+  <section class="section section-alt" id="spazi">
+    <div class="wrap spazi-layout">
+      <div class="spazi-photo reveal">
+        <img src="assets/spazi.jpg" alt="Sala del centro Kaleido Care con area TNPEE, tappetone morbido, giochi motori e postazione dedicata ai colloqui">
+      </div>
+      <div>
+        <p class="kicker">Gli spazi</p>
+        <h2 class="fs-h2 reveal" style="margin-top:16px; color:var(--teal-900);">Ambienti pensati per il bambino</h2>
+        <p class="fs-lead reveal" style="margin-top:20px; color:var(--ink-soft);">Le sale del centro uniscono accoglienza ed ergonomia: luce calda, materiali naturali e un'area dedicata alla TNPEE, pensata per il gioco e per l'espressione corporea, emotiva e simbolica del bambino.</p>
+        <div class="spazi-tags">
+          <span class="tag">Area TNPEE</span>
+          <span class="tag">Spazio gioco</span>
+          <span class="tag">Ambiente tranquillo</span>
+          <span class="tag">Postazione colloqui</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= APPROCCIO INTEGRATO ================= -->
+  <section class="section approccio-section" id="approccio">
+    <div class="wrap venn-layout">
+      <div class="venn-stage" id="vennStage" aria-hidden="true"></div>
+      <div>
+        <p class="kicker">L'approccio</p>
+        <h2 class="fs-h2 reveal" style="margin-top:16px; color:var(--teal-900);">Un approccio integrato, mai standard</h2>
+        <p class="fs-lead reveal" style="margin-top:20px; color:var(--ink-soft);">Ogni bambino è diverso, e il percorso viene costruito mettendo in relazione competenze e prospettive differenti: cliniche, evolutive, relazionali.</p>
+        <p class="fs-lead reveal" style="margin-top:16px; color:var(--ink-soft);">Le aree professionali si intersecano dove serve, senza sovrapporsi in modo rigido — così da restare aderenti ai bisogni reali di ogni bambino e famiglia.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ASSE INTESTINO-CERVELLO ================= -->
+  <section class="section section-alt" id="metabolico">
+    <div class="wrap">
+      <div class="section-head" style="margin-bottom:40px;">
+        <p class="kicker">La dimensione neuro-metabolica</p>
+        <h2 class="fs-h2 reveal" style="margin-top:16px;">Uno sguardo anche su nutrizione e microbiota</h2>
+      </div>
+      <div class="gut-brain reveal">
+        <div>
+          <h3 class="fs-h3" style="color:var(--teal-900);">L'asse intestino-cervello</h3>
+          <p style="margin-top:14px; color:var(--ink-soft);">La ricerca scientifica dedica crescente attenzione alla relazione tra intestino, microbiota e sistema nervoso: un ambito di studio in evoluzione, che può offrire un ulteriore punto di osservazione sul benessere del bambino.</p>
+        </div>
+        <div>
+          <p style="color:var(--ink-soft);">All'interno di Kaleido Care, quando clinicamente indicato, il percorso può essere integrato con una valutazione della dimensione nutrizionale, gastrointestinale, immunologica e metabolica, seguita dal professionista dedicato a questa area.</p>
+          <div class="gut-brain-note">Questa componente rappresenta un possibile approfondimento all'interno del percorso, non una terapia sostitutiva né una promessa di risultato: ogni indicazione viene valutata caso per caso dal professionista competente.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PERCHÉ KALEIDO CARE ================= -->
+  <section class="section" id="perche">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Perché Kaleido Care</p>
+        <h2 class="fs-h2 reveal">Quattro motivi per iniziare da qui</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card reveal">
+          <span class="fs-num">01</span>
+          <h3>Un unico riferimento</h3>
+          <p>Le diverse competenze sono riunite nello stesso centro, per un percorso più semplice da seguire.</p>
+        </div>
+        <div class="why-card reveal">
+          <span class="fs-num">02</span>
+          <h3>Una visione condivisa</h3>
+          <p>Le professionalità coinvolte si confrontano sugli obiettivi del percorso, non lavorano in compartimenti separati.</p>
+        </div>
+        <div class="why-card reveal">
+          <span class="fs-num">03</span>
+          <h3>Accanto alla famiglia</h3>
+          <p>Il lavoro non si ferma alla stanza dello specialista: cerca continuità nella vita quotidiana del bambino.</p>
+        </div>
+        <div class="why-card reveal">
+          <span class="fs-num">04</span>
+          <h3>Dalla valutazione al percorso</h3>
+          <p>Le diverse competenze dialogano tra loro quando necessario, lungo tutto il percorso del bambino.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ETÀ EVOLUTIVA ================= -->
+  <section class="eta-section section-alt" id="eta">
+    <div class="wrap">
+      <p class="kicker" style="justify-content:center;">L'età evolutiva</p>
+      <div class="eta-number reveal" style="margin-top:20px;">0<span class="sep">—</span>18</div>
+      <p class="fs-lead">Kaleido Care accompagna bambini, ragazze e ragazzi lungo l'intero arco dell'età evolutiva, insieme alle loro famiglie.</p>
+    </div>
+  </section>
+
+  <!-- ================= CTA FINALE ================= -->
+  <section class="cta-final" id="cta-finale">
+    <div class="bg-blob" style="width:480px;height:480px; background:var(--teal-700); opacity:0.5; top:-120px; left:-100px;"></div>
+    <div class="bg-blob" style="width:420px;height:420px; background:var(--sage-600); opacity:0.35; bottom:-120px; right:-80px;"></div>
+    <div class="wrap" style="position:relative; z-index:2;">
+      <h2 class="fs-h2 reveal">Ogni percorso inizia da un primo passo.</h2>
+      <p class="fs-lead reveal">Scrivi o chiama il centro per fissare un primo contatto: siamo a disposizione per rispondere alle tue domande.</p>
+      <div class="btn-row">
+        <a href="#contatti" class="btn btn-light">Contattaci</a>
+      </div>
+      <a href="tel:+393316643177" class="phone-link">oppure chiama il 331 6643177</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= CONTATTI / FOOTER ================= -->
+<footer id="contatti">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/logo.svg" alt="Kaleido Care">
+        <p>Ecosistema integrato per il neurosviluppo, la famiglia e la comunità educante.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Dove siamo</h4>
+        <p>Kaleido Care<br>Vesa Coworking<br>Via Giacomo Leopardi 15<br>Frattamaggiore (NA)</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Via+Giacomo+Leopardi+15+Frattamaggiore+NA" target="_blank" rel="noopener">Apri in mappa →</a>
+      </div>
+      <div class="footer-col">
+        <h4>Infoline &amp; prenotazioni</h4>
+        <p>331 6643177</p>
+        <a href="tel:+393316643177" class="footer-call">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+          Chiama ora
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Kaleido Care</span>
+      <span>Vesa Coworking, Via Giacomo Leopardi 15 — Frattamaggiore (NA)</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ---------- Header on scroll ---------- */
+  var header = document.getElementById('siteHeader');
+  var onScroll = function(){
+    if(window.scrollY > 12){ header.classList.add('scrolled'); }
+    else{ header.classList.remove('scrolled'); }
+  };
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* ---------- Mobile menu ---------- */
+  var burger = document.getElementById('burgerBtn');
+  var mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', function(){
+    var open = mobileMenu.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      mobileMenu.classList.remove('open');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded','false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  /* ---------- Reveal on scroll ---------- */
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window && !reduced){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.15, rootMargin:'0px 0px -40px 0px'});
+    revealEls.forEach(function(el, i){
+      el.style.transitionDelay = (Math.min(i % 4, 3) * 70) + 'ms';
+      io.observe(el);
+    });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in-view'); });
+  }
+
+  /* =========================================================
+     Original kaleidoscope graphics (petal motif inspired by,
+     but distinct from, the Kaleido Care logo artwork)
+     ========================================================= */
+  var NS = 'http://www.w3.org/2000/svg';
+  function svgEl(tag, attrs){
+    var el = document.createElementNS(NS, tag);
+    for(var k in attrs){ el.setAttribute(k, attrs[k]); }
+    return el;
+  }
+
+  var PALETTE = ['#427E8A','#E38A72','#E7BA6E','#93BEDB','#A0BE9E','#1D6478'];
+
+  function petalPath(r){
+    // teardrop / petal pointing "up" from origin (0,0)
+    var w = r*0.62;
+    return 'M0,0 C '+(-w)+','+(-r*0.42)+' '+(-w*0.55)+','+(-r*0.98)+' 0,'+(-r)+
+           ' C '+(w*0.55)+','+(-r*0.98)+' '+w+','+(-r*0.42)+' 0,0 Z';
+  }
+
+  function buildKaleido(container, opts){
+    if(!container) return null;
+    opts = opts || {};
+    var petals = opts.petals || 8;
+    var layers = opts.layers || 2;
+    var size = 400;
+    var svg = svgEl('svg', {viewBox:'0 0 '+size+' '+size, 'aria-hidden':'true'});
+    var defs = svgEl('defs', {});
+    svg.appendChild(defs);
+    var root = svgEl('g', {transform:'translate('+size/2+','+size/2+')'});
+    svg.appendChild(root);
+
+    for(var l=0; l<layers; l++){
+      var layerG = svgEl('g', {'data-layer':l, style:'mix-blend-mode:multiply;'});
+      var rBase = (size*0.46) * (1 - l*0.32);
+      var count = petals - l*2;
+      for(var i=0; i<count; i++){
+        var angle = (360/count) * i;
+        var color = PALETTE[(i + l*2) % PALETTE.length];
+        var p = svgEl('path', {
+          d: petalPath(rBase),
+          fill: color,
+          opacity: 0.82,
+          transform: 'rotate('+angle+')'
+        });
+        layerG.appendChild(p);
+      }
+      root.appendChild(layerG);
+    }
+    var core = svgEl('circle', {r: size*0.045, fill:'#ffffff', opacity:0.9});
+    root.appendChild(core);
+
+    container.appendChild(svg);
+    return {svg:svg, root:root};
+  }
+
+  // Hero decorative kaleidoscope (ambient rotation only)
+  var heroK = buildKaleido(document.getElementById('heroVisual'), {petals:8, layers:2});
+  // Concept section kaleidoscope (interactive)
+  var conceptK = buildKaleido(document.getElementById('kaleidoStage'), {petals:9, layers:2});
+
+  var t = 0;
+  var mouseOffset = 0;
+  function animate(){
+    t += reduced ? 0 : 0.06;
+    if(heroK){ heroK.root.setAttribute('transform', 'translate(200,200) rotate('+(t*1.1)+')'); }
+    if(conceptK){ conceptK.root.setAttribute('transform', 'translate(200,200) rotate('+(t*-0.7 + mouseOffset)+')'); }
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+
+  var kaleidoStage = document.getElementById('kaleidoStage');
+  if(kaleidoStage){
+    kaleidoStage.addEventListener('mousemove', function(e){
+      var rect = kaleidoStage.getBoundingClientRect();
+      var relX = (e.clientX - rect.left) / rect.width - 0.5;
+      mouseOffset = relX * 60;
+    });
+    kaleidoStage.addEventListener('mouseleave', function(){ mouseOffset = 0; });
+    kaleidoStage.addEventListener('touchmove', function(e){
+      if(!e.touches || !e.touches[0]) return;
+      var rect = kaleidoStage.getBoundingClientRect();
+      var relX = (e.touches[0].clientX - rect.left) / rect.width - 0.5;
+      mouseOffset = relX * 60;
+    }, {passive:true});
+  }
+
+  /* ---------- Intro figure: soft layered rings ---------- */
+  (function(){
+    var container = document.getElementById('introFigure');
+    if(!container) return;
+    var size = 400;
+    var svg = svgEl('svg', {viewBox:'0 0 '+size+' '+size, width:'100%', height:'100%', preserveAspectRatio:'xMidYMid slice'});
+    var colors = ['#93BEDB','#E7BA6E','#E38A72','#A0BE9E'];
+    for(var i=0;i<4;i++){
+      svg.appendChild(svgEl('circle', {
+        cx: 130 + i*40, cy: 150 + i*30, r: 90 - i*8,
+        fill: colors[i], opacity: 0.55, style:'mix-blend-mode:multiply;'
+      }));
+    }
+    container.appendChild(svg);
+  })();
+
+  /* ---------- Equipe: converging dots ---------- */
+  (function(){
+    var container = document.getElementById('convergeStage');
+    if(!container) return;
+    var size = 420;
+    var svg = svgEl('svg', {viewBox:'0 0 '+size+' '+size});
+    var cx = size/2, cy = size/2;
+    var colors = ['#1D6478','#E38A72','#E7BA6E','#6E9280','#93BEDB'];
+    var count = colors.length;
+    var outerR = size*0.42;
+    var nodes = [];
+    for(var i=0;i<count;i++){
+      var angle = (Math.PI*2/count) * i - Math.PI/2;
+      var x = cx + Math.cos(angle)*outerR;
+      var y = cy + Math.sin(angle)*outerR;
+      nodes.push({x:x, y:y, color:colors[i]});
+    }
+    nodes.forEach(function(n){
+      svg.appendChild(svgEl('line', {x1:n.x, y1:n.y, x2:cx, y2:cy, stroke:n.color, 'stroke-width':1.4, opacity:0.45}));
+    });
+    nodes.forEach(function(n){
+      svg.appendChild(svgEl('circle', {cx:n.x, cy:n.y, r:16, fill:n.color, opacity:0.9}));
+    });
+    svg.appendChild(svgEl('circle', {cx:cx, cy:cy, r:34, fill:'#0F4A5C'}));
+    svg.appendChild(svgEl('circle', {cx:cx, cy:cy, r:34, fill:'none', stroke:'#ffffff', 'stroke-width':2, opacity:0.5}));
+    container.appendChild(svg);
+  })();
+
+  /* ---------- Approccio: intersecting circles ---------- */
+  (function(){
+    var container = document.getElementById('vennStage');
+    if(!container) return;
+    var size = 420;
+    var svg = svgEl('svg', {viewBox:'0 0 '+size+' '+size});
+    var circles = [
+      {cx:170, cy:170, r:120, color:'#427E8A'},
+      {cx:250, cy:170, r:120, color:'#E38A72'},
+      {cx:210, cy:250, r:120, color:'#E7BA6E'}
+    ];
+    circles.forEach(function(c){
+      svg.appendChild(svgEl('circle', {cx:c.cx, cy:c.cy, r:c.r, fill:c.color, opacity:0.55, style:'mix-blend-mode:multiply;'}));
+    });
+    container.appendChild(svg);
+  })();
+
+})();
+</script>
+</body>
+</html>
